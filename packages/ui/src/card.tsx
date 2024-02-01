@@ -1,25 +1,18 @@
-export function Card({
-  className,
-  title,
-  children,
-  href,
-}: {
-  className?: string;
-  title: string;
-  children: React.ReactNode;
-  href: string;
-}): JSX.Element {
+import { HTMLAttributes, PropsWithChildren } from "react";
+import { twMerge } from "tailwind-merge";
+
+export const Card: React.FC<
+  PropsWithChildren<HTMLAttributes<HTMLDivElement>>
+> = (props) => {
   return (
-    <a
-      className={className}
-      href={`${href}?utm_source=create-turbo&utm_medium=basic&utm_campaign=create-turbo"`}
-      rel="noopener noreferrer"
-      target="_blank"
+    <div
+      {...props}
+      className={twMerge(
+        "flex flex-col items-center rounded-3xl border-2 border-slate-200 px-8 py-10 bg-white",
+        props.className
+      )}
     >
-      <h2>
-        {title} <span>-&gt;</span>
-      </h2>
-      <p>{children}</p>
-    </a>
+      {props.children}
+    </div>
   );
-}
+};
